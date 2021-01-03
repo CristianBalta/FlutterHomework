@@ -1,36 +1,54 @@
 import 'package:built_collection/built_collection.dart';
-import 'package:flutter_homework/05/actions/get_movies.dart';
-import 'package:flutter_homework/05/actions/set_genres.dart';
-import 'package:flutter_homework/05/actions/set_order_by.dart';
-import 'package:flutter_homework/05/actions/set_quality.dart';
+import 'package:flutter_homework/05/actions/index.dart';
+import 'package:flutter_homework/05/models/index.dart';
+import 'package:redux/redux.dart';
 
-import 'package:flutter_homework/05/models/app_state.dart';
+Reducer<AppState> reducer = combineReducers(<Reducer<AppState>>[
+  TypedReducer<AppState, GetMoviesStart>(_getMoviesStart),
+  TypedReducer<AppState, GetMoviesSuccessful>(_getMoviesSuccessful),
+  TypedReducer<AppState, GetMoviesError>(_getMoviesError),
+  TypedReducer<AppState, SetQuality>(_setQuality),
+  TypedReducer<AppState, SetOrderBy>(_setOrderBy),
+  TypedReducer<AppState, SetGenres>(_setGenres),
+]);
 
-AppState reducer(AppState state, dynamic action) {
-  final AppStateBuilder builder = state.toBuilder();
+AppState _getMoviesStart(AppState state, GetMoviesStart action) {
+  return state.rebuild((AppStateBuilder b) => b.isLoading = true);
+}
 
-  if (action is GetMoviesStart) {
-    builder.isLoading = true;
-  } else if (action is GetMoviesSuccessful) {
-    builder
+AppState _getMoviesSuccessful(AppState state, GetMoviesSuccessful action) {
+  return state.rebuild((AppStateBuilder b) {
+    b
       ..movies.addAll(action.movies)
       ..isLoading = false
-      ..page = builder.page + 1;
-  } else if (action is GetMoviesError) {
-    builder.isLoading = false;
-  } else if (action is SetQuality) {
-    builder
+      ..page = state.page + 1;
+  });
+}
+
+AppState _getMoviesError(AppState state, GetMoviesError action) {
+  return state.rebuild((AppStateBuilder b) => b.isLoading = false);
+}
+
+AppState _setQuality(AppState state, SetQuality action) {
+  return state.rebuild((AppStateBuilder b) {
+    b
       ..quality = action.quality
       ..movies.clear();
-  } else if (action is SetGenres) {
-    builder
-      ..genres = ListBuilder<String>(action.genres)
-      ..movies.clear();
-  } else if (action is SetOrderBy) {
-    builder
+  });
+}
+
+AppState _setOrderBy(AppState state, SetOrderBy action) {
+  return state.rebuild((AppStateBuilder b) {
+    b
       ..orderBy = action.orderBy
       ..movies.clear();
-  }
+  });
+}
 
-  return builder.build();
+AppState _setGenres(AppState state, SetGenres action) {
+  return state.rebuild((AppStateBuilder b) {
+    b
+      ..genres = ListBuilder<String>(action.genres)
+      ..movies.clear();
+  });
 }

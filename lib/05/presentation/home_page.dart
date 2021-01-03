@@ -1,16 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_homework/05/actions/get_movies.dart';
-import 'package:flutter_homework/05/actions/set_genres.dart';
-import 'package:flutter_homework/05/actions/set_order_by.dart';
-import 'package:flutter_homework/05/actions/set_quality.dart';
-import 'package:flutter_homework/05/containers/genres_container.dart';
-import 'package:flutter_homework/05/containers/is_loading_container.dart';
-import 'package:flutter_homework/05/containers/movies_container.dart';
-import 'package:flutter_homework/05/containers/order_by_container.dart';
-import 'package:flutter_homework/05/containers/quality_container.dart';
-import 'package:flutter_homework/05/models/app_state.dart';
-import 'package:flutter_homework/05/models/movie.dart';
+import 'package:flutter_homework/05/actions/index.dart';
+import 'package:flutter_homework/05/containers/index.dart';
+import 'package:flutter_homework/05/models/index.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/src/store.dart';
 

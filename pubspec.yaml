@@ -14,7 +14,7 @@ dependencies:
 
   cupertino_icons: ^1.0.0
   pedantic: any
-  audioplayers: any
+  audioplayers: ^0.17.0
   http: any
   auto_size_text: any
   built_value: any
@@ -22,6 +22,9 @@ dependencies:
   redux: any
   flutter_redux: any
   freezed_annotation: ^0.12.0
+
+  redux_epics: ^0.14.0
+  rxdart: any
 
 dev_dependencies:
   flutter_test:

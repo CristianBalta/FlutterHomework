@@ -1,8 +1,4 @@
-library set_order_by;
-
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'set_order_by.freezed.dart';
+part of actions;
 
 @freezed
 abstract class SetOrderBy with _$SetOrderBy {
